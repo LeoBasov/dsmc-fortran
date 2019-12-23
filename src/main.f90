@@ -15,23 +15,23 @@ contains
       tst%time_step = time_step
 
       do i = 1, arr_size
-        tst%positions(i, 1) = 1.0
-        tst%positions(i, 2) = 2.0
-        tst%positions(i, 3) = 3.0
+         tst%positions(i, 1) = 1.0
+         tst%positions(i, 2) = 2.0
+         tst%positions(i, 3) = 3.0
 
-        tst%velocities(i, 1) = 4.0
-        tst%velocities(i, 2) = 5.0
-        tst%velocities(i, 3) = 6.0
+         tst%velocities(i, 1) = 4.0
+         tst%velocities(i, 2) = 5.0
+         tst%velocities(i, 3) = 6.0
 
-        print*, tst%positions(i, 1), tst%positions(i, 2), tst%positions(i, 3)
+         print *, tst%positions(i, 1), tst%positions(i, 2), tst%positions(i, 3)
       end do
 
-      print*, "=============================================================="
+      print *, "=============================================================="
 
       call push(tst%positions, tst%velocities, tst%time_step)
 
       do i = 1, arr_size
-        print*, tst%positions(i, 1), tst%positions(i, 2), tst%positions(i, 3)
+         print *, tst%positions(i, 1), tst%positions(i, 2), tst%positions(i, 3)
       end do
 
    end subroutine final
