@@ -5,9 +5,10 @@ program DSMC
 
 contains
    subroutine final()
-      type(Writer) :: wrt_loc
+      type(Writer) :: wrt_loc_1, wrt_loc_2
 
-      wrt_loc = Writer("qest.csv")
+      wrt_loc_1 = Writer("qest_1.csv")
+      wrt_loc_2 = Writer("qest_2.csv")
 
    end subroutine final
 

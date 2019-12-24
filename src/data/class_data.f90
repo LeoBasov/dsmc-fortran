@@ -5,26 +5,26 @@ module class_data
       real, dimension(:, :), allocatable :: positions, velocities
       real :: time_step
    contains
-      final :: destructor
+      final :: data_destructor
       procedure, public :: de_alloc
       procedure, public :: alloc
    end type data
 
    interface Data
-      procedure :: constructor
+      procedure :: data_constructor
    end interface
 
 contains
-   subroutine destructor(this)
+   subroutine data_destructor(this)
       type(Data) :: this
       call this%de_alloc
-   end subroutine destructor
+   end subroutine data_destructor
 
-   function constructor(size) result(this)
+   function data_constructor(size) result(this)
       type(Data) :: this
       integer, intent(in) :: size
       call this%alloc(size)
-   end function constructor
+   end function data_constructor
 
    subroutine alloc(this, size)
       class(Data), intent(out) :: this
