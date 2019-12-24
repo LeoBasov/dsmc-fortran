@@ -19,13 +19,14 @@ module class_writer
 
 contains
    function writer_constructor(file_name) result(this)
-      character(len=*) :: file_name
+      character(len=*), intent(in) :: file_name
       type(Writer) :: this
 
       this%unit_loc = unit_module
       unit_module = unit_module + 1
       open (unit=this%unit_loc, file=file_name)
       call this%write_header
+
    end function writer_constructor
 
    subroutine writer_destructor(this)
@@ -37,12 +38,19 @@ contains
    subroutine write_header(this)
       class(Writer), intent(in) :: this
 
-      write (this%unit_loc, *) "pos_x, pos_y, pos_z, vel_x, vel_y, vel_z"
+      write (this%unit_loc, *) "pos_x, pos_y, pos_z"
    end subroutine write_header
 
    subroutine write_particles(this, particles)
-      class(Writer), intent(in) :: this
+      class(Writer) :: this
       class(Data), intent(out) :: particles
+      integer :: i
 
+      print *, "PARTICLE SIZE", particles%get_size(), size(particles%positions, 1)
+      print *, "FILE", this%unit_loc
+
+      do i = 1, particles%get_size()
+         write (this%unit_loc, *) particles%positions(i, 1), particles%positions(i, 2), particles%positions(i, 3)
+      end do
    end subroutine write_particles
 end module class_writer

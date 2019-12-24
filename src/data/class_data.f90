@@ -9,6 +9,7 @@ module class_data
       final :: data_destructor
       procedure, public :: de_alloc
       procedure, public :: alloc
+      procedure, public :: get_size
    end type data
 
    interface Data
@@ -27,15 +28,14 @@ contains
       call this%alloc(size)
    end function data_constructor
 
-   subroutine alloc(this, size)
+   subroutine alloc(this, new_size)
       class(Data), intent(out) :: this
-      integer, intent(in) :: size
+      integer, intent(in) :: new_size
 
       call this%de_alloc
-      this%data_size = size
-
-      allocate (this%positions(size, 3))
-      allocate (this%velocities(size, 3))
+      this%data_size = new_size
+      allocate (this%positions(new_size, 3))
+      allocate (this%velocities(new_size, 3))
    end subroutine alloc
 
    subroutine de_alloc(this)

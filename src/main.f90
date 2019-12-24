@@ -1,14 +1,18 @@
 program DSMC
    use class_writer
+   use class_data
 
    call final()
 
 contains
    subroutine final()
-      type(Writer) :: wrt_loc_1, wrt_loc_2
+      type(Writer) :: wrt_loc
+      type(Data) :: particles
 
-      wrt_loc_1 = Writer("qest_1.csv")
-      wrt_loc_2 = Writer("qest_2.csv")
+      particles = Data(12)
+      wrt_loc = Writer("positions.csv")
+
+      call wrt_loc%write (particles)
 
    end subroutine final
 
