@@ -42,8 +42,8 @@ contains
    end subroutine write_header
 
    subroutine write_particles(this, particles)
-      class(Writer) :: this
-      class(Data), intent(out) :: particles
+      class(Writer), intent(in) :: this
+      class(Data), intent(in) :: particles
       integer :: i
 
       print *, "PARTICLE SIZE", particles%get_size(), size(particles%positions, 1)
