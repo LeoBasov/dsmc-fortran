@@ -16,7 +16,7 @@ module class_writer
 
 contains
    function constructor(file_name) result(this)
-      character :: file_name
+      character(len=*) :: file_name
       type(Writer) :: this
 
       this%unit_loc = unit_module
