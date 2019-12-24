@@ -3,7 +3,8 @@ module class_data
 
    type :: Data
       real, dimension(:, :), allocatable :: positions, velocities
-      real :: time_step
+      real, private :: time_step
+      integer, private :: data_size
    contains
       final :: data_destructor
       procedure, public :: de_alloc
@@ -29,8 +30,12 @@ contains
    subroutine alloc(this, size)
       class(Data), intent(out) :: this
       integer, intent(in) :: size
-      if (.not. ALLOCATED(this%positions)) allocate (this%positions(size, 3))
-      if (.not. ALLOCATED(this%velocities)) allocate (this%velocities(size, 3))
+
+      call this%de_alloc
+      this%data_size = size
+
+      allocate (this%positions(size, 3))
+      allocate (this%velocities(size, 3))
    end subroutine alloc
 
    subroutine de_alloc(this)
@@ -38,5 +43,12 @@ contains
       if (ALLOCATED(this%positions)) deallocate (this%positions)
       if (ALLOCATED(this%velocities)) deallocate (this%velocities)
    end subroutine de_alloc
+
+   function get_size(this) result(ret_size)
+      class(Data), intent(in) :: this
+      integer :: ret_size
+
+      ret_size = this%data_size
+   end function get_size
 
 end module class_data
