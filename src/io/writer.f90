@@ -46,11 +46,8 @@ contains
       class(Data), intent(in) :: particles
       integer :: i
 
-      print *, "PARTICLE SIZE", particles%get_size(), size(particles%positions, 1)
-      print *, "FILE", this%unit_loc
-
       do i = 1, particles%get_size()
-         write (this%unit_loc, *) particles%positions(i, 1), particles%positions(i, 2), particles%positions(i, 3)
+         write (this%unit_loc, *) particles%positions(i, 1), ",", particles%positions(i, 2), ",", particles%positions(i, 3)
       end do
    end subroutine write_particles
 end module class_writer
