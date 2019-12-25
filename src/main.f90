@@ -18,7 +18,7 @@ contains
       call init(particles)
 
       do i = 1, n
-         write (file_name, "(A10,I1)") "positions_", i
+         write (file_name, "(A10,I1,A4)") "positions_", i, ".csv"
 
          file_name = trim(file_name)
          wrt_loc = Writer(file_name)
