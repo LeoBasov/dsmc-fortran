@@ -3,7 +3,7 @@ module class_data
 
    type :: Data
       real, dimension(:, :), allocatable :: positions, velocities
-      real, private :: time_step
+      real :: time_step
       integer, private :: data_size
    contains
       final :: data_destructor

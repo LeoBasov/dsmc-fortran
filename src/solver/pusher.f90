@@ -1,8 +1,8 @@
-module pusher_solver
+module class_pusher
 
 contains
    subroutine push(positions, velocities, time_step)
-      real, dimension(:, :), intent(out) :: positions
+      real, dimension(:, :), intent(inout) :: positions
       real, dimension(:, :), intent(in) :: velocities
       real, intent(in) :: time_step
 
@@ -10,4 +10,4 @@ contains
 
    end subroutine push
 
-end module pusher_solver
+end module class_pusher
