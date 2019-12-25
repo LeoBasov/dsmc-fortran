@@ -10,26 +10,28 @@ contains
    subroutine final()
       type(cuboid) :: cube
 
-      type(Writer) :: wrt_loc
-      type(Data) :: particles
-      integer :: i, n = 9
-      character(len=1024) :: file_name
+      !type(Writer) :: wrt_loc
+      !type(Data) :: particles
+      !integer :: i, n = 9
+      !character(len=1024) :: file_name
 
       cube = cuboid()
 
-      particles = Data(12)
-      particles%time_step = 1.0
+      print *, cube%volume()
 
-      call init(particles)
+      !particles = Data(12)
+      !particles%time_step = 1.0
 
-      do i = 1, n
-         write (file_name, "(A10,I1,A4)") "positions_", i, ".csv"
+      !call init(particles)
 
-         file_name = trim(file_name)
-         wrt_loc = Writer(file_name)
-         call wrt_loc%write (particles)
-         call push(particles%positions, particles%velocities, particles%time_step)
-      end do
+      !do i = 1, n
+      !   write (file_name, "(A10,I1,A4)") "positions_", i, ".csv"
+
+      !   file_name = trim(file_name)
+      !   wrt_loc = Writer(file_name)
+      !   call wrt_loc%write (particles)
+      !   call push(particles%positions, particles%velocities, particles%time_step)
+      !end do
 
    end subroutine final
 
