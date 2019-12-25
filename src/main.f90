@@ -2,15 +2,20 @@ program DSMC
    use class_writer
    use class_data
    use class_pusher
+   use class_cuboid
 
    call final()
 
 contains
    subroutine final()
+      type(cuboid) :: cube
+
       type(Writer) :: wrt_loc
       type(Data) :: particles
       integer :: i, n = 9
       character(len=1024) :: file_name
+
+      cube = cuboid()
 
       particles = Data(12)
       particles%time_step = 1.0
