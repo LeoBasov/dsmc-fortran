@@ -9,13 +9,22 @@ contains
    subroutine final()
       type(Writer) :: wrt_loc
       type(Data) :: particles
+      integer :: i, n = 9
+      character(len=1024) :: file_name
 
       particles = Data(12)
-      wrt_loc = Writer("positions.csv")
+      particles%time_step = 1.0
 
       call init(particles)
-      call push(particles%positions, particles%velocities, particles%time_step)
-      call wrt_loc%write (particles)
+
+      do i = 1, n
+         write (file_name, "(A10,I1)") "positions_", i
+
+         file_name = trim(file_name)
+         wrt_loc = Writer(file_name)
+         call wrt_loc%write (particles)
+         call push(particles%positions, particles%velocities, particles%time_step)
+      end do
 
    end subroutine final
 
