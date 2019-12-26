@@ -13,6 +13,7 @@ contains
       type(domain) :: sim_dom
       real :: time_step = 0.1
       integer :: i, number_partilces = 10, number_itterations = 100
+      character(len=1024) :: file_name
 
       sim_dom = domain(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0)
       call sim_dom%initialize(particles, number_partilces)
@@ -33,22 +34,22 @@ contains
       end do
       print *, "================================================================"
 
-      !integer :: i, n = 9
-      !character(len=1024) :: file_name
+      print *, "PUSHING PARTICLES"
+      do i = 1, number_itterations
+         call push_particles(particles)
 
-      !particles = Data(12)
-      !particles%time_step = 1.0
+         if (i < 10) then
+            write (file_name, "(A10,I1,A4)") "positions_", i, ".csv"
+         else if (i < 100) then
+            write (file_name, "(A10,I2,A4)") "positions_", i, ".csv"
+         else if (i < 1000) then
+            write (file_name, "(A10,I3,A4)") "positions_", i, ".csv"
+         end if
 
-      !call init(particles)
-
-      !do i = 1, n
-      !write (file_name, "(A10,I1,A4)") "positions_", i, ".csv"
-
-      !file_name = trim(file_name)
-      !wrt_loc = Writer(file_name)
-      !call wrt_loc%write (particles)
-      !call push(particles%positions, particles%velocities, particles%time_step)
-      !end do
+         file_name = trim(file_name)
+         wrt_loc = Writer(file_name)
+         call wrt_loc%write (particles)
+      end do
 
    end subroutine final
 
