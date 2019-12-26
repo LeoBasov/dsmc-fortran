@@ -9,6 +9,7 @@ module class_domain
 
    contains
       procedure :: execute => domain_execute
+      procedure :: initialize => domain_initialize
    end type domain
 
    interface domain
@@ -39,12 +40,17 @@ contains
       class(domain), intent(in):: this
       class(data), allocatable, intent(out) :: particles
       integer, intent(in) :: particles_size
-      integer :: i
+      integer :: i, j
+      real, dimension(3) :: r_pos
 
       particles = data(particles_size)
 
       do i = 1, particles_size
-         ! initialization
+         call random_number(r_pos)
+
+         particles%positions(i, 1) = this%cube%get_x_min() + (this%cube%get_x_max() - this%cube%get_x_min())*r_pos(1)
+         particles%positions(i, 2) = this%cube%get_y_min() + (this%cube%get_y_max() - this%cube%get_y_min())*r_pos(2)
+         particles%positions(i, 3) = this%cube%get_z_min() + (this%cube%get_z_max() - this%cube%get_z_min())*r_pos(3)
       end do
    end subroutine domain_initialize
 

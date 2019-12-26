@@ -9,6 +9,12 @@ module class_cuboid
       procedure :: set
       procedure :: volume
       procedure :: inside
+      procedure :: get_x_min
+      procedure :: get_y_min
+      procedure :: get_z_min
+      procedure :: get_x_max
+      procedure :: get_y_max
+      procedure :: get_z_max
    end type cuboid
 
    interface cuboid
@@ -61,5 +67,47 @@ contains
 
       val = x_in .and. y_in .and. z_in
    end function inside
+
+   function get_x_min(this) result(res)
+      class(cuboid), intent(in) :: this
+      real :: res
+
+      res = this%x_min
+   end function
+
+   function get_y_min(this) result(res)
+      class(cuboid), intent(in) :: this
+      real :: res
+
+      res = this%y_min
+   end function
+
+   function get_z_min(this) result(res)
+      class(cuboid), intent(in) :: this
+      real :: res
+
+      res = this%z_min
+   end function
+
+   function get_x_max(this) result(res)
+      class(cuboid), intent(in) :: this
+      real :: res
+
+      res = this%x_max
+   end function
+
+   function get_y_max(this) result(res)
+      class(cuboid), intent(in) :: this
+      real :: res
+
+      res = this%y_max
+   end function
+
+   function get_z_max(this) result(res)
+      class(cuboid), intent(in) :: this
+      real :: res
+
+      res = this%z_max
+   end function
 
 end module class_cuboid
