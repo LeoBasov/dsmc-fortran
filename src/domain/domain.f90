@@ -31,7 +31,29 @@ contains
 
       do i = 1, particles%get_size()
          if (.not. this%cube%inside(particles%positions(i, 1:3))) then
-            ! execute elastic scattering
+            if (particles%positions(i, 1) < this%cube%get_x_min()) then
+               particles%positions(i, 1) = 2.0*this%cube%get_x_min() - particles%positions(i, 1)
+            end if
+
+            if (particles%positions(i, 1) > this%cube%get_x_max()) then
+               particles%positions(i, 1) = 2.0*this%cube%get_x_max() - particles%positions(i, 1)
+            end if
+
+            if (particles%positions(i, 2) < this%cube%get_y_min()) then
+               particles%positions(i, 2) = 2.0*this%cube%get_y_min() - particles%positions(i, 2)
+            end if
+
+            if (particles%positions(i, 2) > this%cube%get_y_max()) then
+               particles%positions(i, 2) = 2.0*this%cube%get_y_max() - particles%positions(i, 2)
+            end if
+
+            if (particles%positions(i, 3) < this%cube%get_z_min()) then
+               particles%positions(i, 3) = 2.0*this%cube%get_z_min() - particles%positions(i, 3)
+            end if
+
+            if (particles%positions(i, 3) > this%cube%get_z_max()) then
+               particles%positions(i, 3) = 2.0*this%cube%get_z_max() - particles%positions(i, 3)
+            end if
          end if
       end do
    end subroutine domain_execute
