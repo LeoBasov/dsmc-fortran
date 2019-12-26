@@ -11,16 +11,27 @@ contains
       type(Writer) :: wrt_loc
       class(Data), allocatable :: particles
       type(domain) :: sim_dom
-      real :: time_step = 1.0
+      real :: time_step = 0.1
       integer :: i, number_partilces = 10, number_itterations = 100
 
       sim_dom = domain(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0)
       call sim_dom%initialize(particles, number_partilces)
       particles%time_step = time_step
 
+      print *, "================================================================"
+      print *, "POSITIONS"
+      print *, "----------------------------------------------------------------"
       do i = 1, particles%get_size()
          print *, particles%positions(i, 1:3)
       end do
+
+      print *, "================================================================"
+      print *, "VELOCITIES"
+      print *, "----------------------------------------------------------------"
+      do i = 1, particles%get_size()
+         print *, particles%velocities(i, 1:3)
+      end do
+      print *, "================================================================"
 
       !integer :: i, n = 9
       !character(len=1024) :: file_name

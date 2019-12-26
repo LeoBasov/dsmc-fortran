@@ -41,16 +41,21 @@ contains
       class(data), allocatable, intent(out) :: particles
       integer, intent(in) :: particles_size
       integer :: i, j
-      real, dimension(3) :: r_pos
+      real, dimension(3) :: r_pos, r_vel
 
       particles = data(particles_size)
 
       do i = 1, particles_size
          call random_number(r_pos)
+         call random_number(r_vel)
 
          particles%positions(i, 1) = this%cube%get_x_min() + (this%cube%get_x_max() - this%cube%get_x_min())*r_pos(1)
          particles%positions(i, 2) = this%cube%get_y_min() + (this%cube%get_y_max() - this%cube%get_y_min())*r_pos(2)
          particles%positions(i, 3) = this%cube%get_z_min() + (this%cube%get_z_max() - this%cube%get_z_min())*r_pos(3)
+
+         particles%velocities(i, 1) = 1.0 - 2.0*r_vel(1)
+         particles%velocities(i, 2) = 1.0 - 2.0*r_vel(2)
+         particles%velocities(i, 3) = 1.0 - 2.0*r_vel(3)
       end do
    end subroutine domain_initialize
 
