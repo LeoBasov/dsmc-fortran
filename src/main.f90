@@ -20,22 +20,9 @@ contains
       particles%time_step = time_step
 
       print *, "================================================================"
-      print *, "POSITIONS"
-      print *, "----------------------------------------------------------------"
-      do i = 1, particles%get_size()
-         print *, particles%positions(i, 1:3)
-      end do
-
-      print *, "================================================================"
-      print *, "VELOCITIES"
-      print *, "----------------------------------------------------------------"
-      do i = 1, particles%get_size()
-         print *, particles%velocities(i, 1:3)
-      end do
-      print *, "================================================================"
-
-      print *, "PUSHING PARTICLES"
+      print *, "DSMC SIMULATION"
       do i = 1, number_itterations
+         print *, "EXEUTING ITTERATION", i
          call push_particles(particles)
 
          if (i < 10) then
@@ -47,9 +34,11 @@ contains
          end if
 
          file_name = trim(file_name)
-         wrt_loc = Writer(file_name)
-         call wrt_loc%write (particles)
+         !wrt_loc = Writer(file_name)
+         !call wrt_loc%write (particles)
       end do
+      print *, "DONE"
+      print *, "================================================================"
 
    end subroutine final
 
