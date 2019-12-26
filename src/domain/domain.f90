@@ -33,26 +33,32 @@ contains
          if (.not. this%cube%inside(particles%positions(i, 1:3))) then
             if (particles%positions(i, 1) < this%cube%get_x_min()) then
                particles%positions(i, 1) = 2.0*this%cube%get_x_min() - particles%positions(i, 1)
+               particles%velocities(i, 1) = -1.0*particles%velocities(i, 1)
             end if
 
             if (particles%positions(i, 1) > this%cube%get_x_max()) then
                particles%positions(i, 1) = 2.0*this%cube%get_x_max() - particles%positions(i, 1)
+               particles%velocities(i, 1) = -1.0*particles%velocities(i, 1)
             end if
 
             if (particles%positions(i, 2) < this%cube%get_y_min()) then
                particles%positions(i, 2) = 2.0*this%cube%get_y_min() - particles%positions(i, 2)
+               particles%velocities(i, 2) = -1.0*particles%velocities(i, 2)
             end if
 
             if (particles%positions(i, 2) > this%cube%get_y_max()) then
                particles%positions(i, 2) = 2.0*this%cube%get_y_max() - particles%positions(i, 2)
+               particles%velocities(i, 2) = -1.0*particles%velocities(i, 2)
             end if
 
             if (particles%positions(i, 3) < this%cube%get_z_min()) then
                particles%positions(i, 3) = 2.0*this%cube%get_z_min() - particles%positions(i, 3)
+               particles%velocities(i, 3) = -1.0*particles%velocities(i, 3)
             end if
 
             if (particles%positions(i, 3) > this%cube%get_z_max()) then
                particles%positions(i, 3) = 2.0*this%cube%get_z_max() - particles%positions(i, 3)
+               particles%velocities(i, 3) = -1.0*particles%velocities(i, 3)
             end if
          end if
       end do

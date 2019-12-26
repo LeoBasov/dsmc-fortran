@@ -23,7 +23,9 @@ contains
       print *, "DSMC SIMULATION"
       do i = 1, number_itterations
          print *, "EXEUTING ITTERATION", i
+
          call push_particles(particles)
+         call sim_dom%execute(particles)
 
          if (i < 10) then
             write (file_name, "(A10,I1,A4)") "positions_", i, ".csv"
@@ -34,8 +36,8 @@ contains
          end if
 
          file_name = trim(file_name)
-         !wrt_loc = Writer(file_name)
-         !call wrt_loc%write (particles)
+         wrt_loc = Writer(file_name)
+         call wrt_loc%write (particles)
       end do
       print *, "DONE"
       print *, "================================================================"
