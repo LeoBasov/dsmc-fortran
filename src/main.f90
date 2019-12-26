@@ -12,7 +12,7 @@ contains
       class(Data), allocatable :: particles
       type(domain) :: sim_dom
       real :: time_step = 0.1
-      integer :: i, number_partilces = 10, number_itterations = 100
+      integer :: i, number_partilces = 1000, number_itterations = 100
       character(len=1024) :: file_name
 
       sim_dom = domain(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0)
@@ -22,7 +22,7 @@ contains
       print *, "================================================================"
       print *, "DSMC SIMULATION"
       do i = 1, number_itterations
-         print *, "EXEUTING ITTERATION", i
+         !print *, "EXEUTING ITTERATION", i
 
          call push_particles(particles)
          call sim_dom%execute(particles)
@@ -39,8 +39,8 @@ contains
          wrt_loc = Writer(file_name)
          call wrt_loc%write (particles)
       end do
-      print *, "DONE"
-      print *, "================================================================"
+      !print *, "DONE"
+      !print *, "================================================================"
 
    end subroutine final
 
