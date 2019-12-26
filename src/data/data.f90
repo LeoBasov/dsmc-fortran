@@ -2,7 +2,7 @@ module class_data
    implicit none
 
    type :: Data
-      real, dimension(:, :), allocatable :: positions, velocities
+      real, dimension(:, :), allocatable :: positions, old_positions, velocities
       real :: time_step
       integer, private :: data_size
    contains
@@ -35,12 +35,14 @@ contains
       call this%de_alloc
       this%data_size = new_size
       allocate (this%positions(new_size, 3))
+      allocate (this%old_positions(new_size, 3))
       allocate (this%velocities(new_size, 3))
    end subroutine alloc
 
    subroutine de_alloc(this)
       class(Data) :: this
       if (ALLOCATED(this%positions)) deallocate (this%positions)
+      if (ALLOCATED(this%old_positions)) deallocate (this%old_positions)
       if (ALLOCATED(this%velocities)) deallocate (this%velocities)
    end subroutine de_alloc
 
